@@ -1,0 +1,8 @@
+name: downsampling
+channels:
+  - conda-forge
+  - bioconda                                                      
+dependencies:
+  - python=3.8
+  - mosdepth
+  - samtools=1.9

@@ -1,0 +1,3 @@
+samples: "config/samples_downsampling.tsv" ##.tsv file containing sample names and locations 
+
+coverage: "10" ##largest possible coverage of all samples

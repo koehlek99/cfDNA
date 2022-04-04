@@ -1,0 +1,9 @@
+include: "rules/output.smk"
+include: "rules/downsampling.smk"
+include: "rules/snakefile_GE_analysis.smk"
+include: "rules/rf_prediction.smk"
+
+
+rule all: 
+    input: 
+        get_final_output(),
