@@ -32,7 +32,7 @@ For installation details, see the [instructions in the Snakemake documentation](
 
 ### Step 4: Execute workflow
 
-The workflows are executed from the repository root folder. The different analyses have to be executed separately. To specify the respective workflow use the `-s` switch followed by the path of the `Snakefile` (`workflow/Snakefile.smk`)
+The workflows are executed from the repository root folder. To run the workflow use the `-s` switch followed by the path of the `Snakefile` (`workflow/Snakefile.smk`)
 
 Activate the conda environment:
 
