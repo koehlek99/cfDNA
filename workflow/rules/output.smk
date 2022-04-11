@@ -52,21 +52,21 @@ def get_final_output():
         ),
     ), 
     final_output.extend(
-        expand("results/features/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv",
+        expand("results/rf/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv.gz",
             SAMPLE=samples["sample"],
             COV=config["coverage"],
             ID=samples["ID"],
             GENOME=samples["genome_build"],
         ),
     ),
-    # final_output.extend(
-    #     expand("results/predictions/{ID}/{GENOME}/predictions_{SAMPLE}.{COV}x.csv",
-    #         SAMPLE=samples["sample"],
-    #         COV=config["coverage"],
-    #         ID=samples["ID"],
-    #         GENOME=samples["genome_build"],
-    #     ),
-    # ),
+    final_output.extend(
+        expand("results/rf/{ID}/{GENOME}/predictions_{SAMPLE}.{COV}x.csv.gz",
+            SAMPLE=samples["sample"],
+            COV=config["coverage"],
+            ID=samples["ID"],
+            GENOME=samples["genome_build"],
+        ),
+    ),
 
 
 

@@ -1,9 +1,7 @@
 import gzip
 import pandas as pd
 import numpy as np
-#import matplotlib.pyplot as plt
 import scipy.signal as sps
-#import pysam
 
 
 ##read datasets
@@ -32,19 +30,19 @@ features = pd.DataFrame(index = fft.index)
 
 features["mean_expression"] = mean_expression
 features['mean_cov_5k'] = coverage.loc[:,0:5000].mean(axis = 1)
-features['mean_cov_2k'] = coverage.loc[:,0:2000].mean(axis = 1)
+features['mean_cov'] = coverage.loc[:,0:11000].mean(axis = 1)
 features = features.merge(gc_promotor, left_index = True, right_index = True)
-features['mean_wps_5k'] = wps.loc[:,0:5000].mean(axis = 1)
-features['mean_cov_body1kb'] = coverage.loc[:,1000:2000].mean(axis = 1)
+features['mean_cov_2k'] = coverage.loc[:,0:2000].mean(axis = 1)
+features['mean_wps'] = wps.loc[:,0:11000].mean(axis = 1)
 features['mean_wps_2k'] = wps.loc[:,0:2000].mean(axis = 1)
-features["177"] = fft["177"]
-features["198"] = fft["198"]
-features["195"] = fft["195"]
+features["197"] = fft["197"]
+features["200"] = fft["200"]
+features["194"] = fft["194"]
+features['mean_wps_5k'] = wps.loc[:,0:5000].mean(axis = 1)
+features["202"] = fft["202"]
+features['mean_cov_body1kb'] = coverage.loc[:,1000:2000].mean(axis = 1)
+features['mean_wps_body1kb'] = wps.loc[:,1000:2000].mean(axis = 1)
 features['ndr_mean_cov'] = 0
-features["208"] = fft["208"]
-features["192"] = fft["192"]
-features["201"] = fft["201"]
-features["205"] = fft["205"]
 
 
 ##smooth wps
@@ -80,7 +78,6 @@ features.to_csv(snakemake.output['FEATURES'], sep = '\t', header = True)
 
 
 ##unused features
-
 #features['median_cov_body1kb'] = coverage.loc[:,1000:2000].median(axis = 1)
 #features['var_cov_body1kb'] = coverage.loc[:,1000:2000].var(axis = 1)
 #features['mean_cov_upstream1kb'] = coverage.loc[:,0:1000].mean(axis = 1)
@@ -88,7 +85,6 @@ features.to_csv(snakemake.output['FEATURES'], sep = '\t', header = True)
 #features['var_cov_upstream1kb'] = coverage.loc[:,0:1000].var(axis = 1)
 #features['variance_cov_2k'] = coverage.loc[:,0:2000].var(axis = 1)
 #features['median_cov_2k'] = coverage.loc[:,0:2000].median(axis = 1)
-#features['mean_wps_body1kb'] = wps.loc[:,1000:2000].mean(axis = 1)
 #features['median_wps_body1kb'] = wps.loc[:,1000:2000].median(axis = 1)
 #features['var_wps_body1kb'] = wps.loc[:,1000:2000].var(axis = 1)
 #features['mean_wps_upstream1kb'] = wps.loc[:,0:1000].mean(axis = 1)
@@ -96,8 +92,6 @@ features.to_csv(snakemake.output['FEATURES'], sep = '\t', header = True)
 #features['var_wps_upstream1kb'] = wps.loc[:,0:1000].var(axis = 1)
 #features['variance_wps_2k'] = wps.loc[:,0:2000].var(axis = 1)
 #features['median_wps_2k'] = wps.loc[:,0:2000].median(axis = 1)
-#features['mean_cov'] = coverage.loc[:,1000:12700].mean(axis = 1)
-#features['mean_wps'] = wps.loc[:,1000:12700].mean(axis = 1)
 #features['median_cov'] = coverage.loc[:,1000:12700].median(axis = 1)
 #features['median_wps'] = wps.loc[:,1000:12700].median(axis = 1)
 #features['amp1'] = 0

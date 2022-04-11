@@ -8,7 +8,7 @@ rule extract_features:
         GC = "resources/rf/GC_content.csv",
         MONOCYTES = "resources/rf/RNAtableExtended.tsv.gz",
     output:
-        FEATURES = "results/features/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv"
+        FEATURES = "results/rf/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv.gz"
     conda: 
         "../envs/rf.yml"
     script:
@@ -17,10 +17,10 @@ rule extract_features:
 
 rule predict_expression:
     input:
-        FEATURES = "results/features/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv",
+        FEATURES = "results/rf/{ID}/{GENOME}/features_{SAMPLE}.{COV}x.csv.gz",
         MODEL = "resources/rf/rf_model.joblib",
     output:
-        PREDICTIONS = "results/predictions/{ID}/{GENOME}/predictions_{SAMPLE}.{COV}x.csv"
+        PREDICTIONS = "results/rf/{ID}/{GENOME}/predictions_{SAMPLE}.{COV}x.csv.gz"
     conda: 
         "../envs/rf.yml"
     script:
