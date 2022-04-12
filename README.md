@@ -68,7 +68,6 @@ After calculating the coverage of each BAM file using mosdepth, the BAM files ar
     - analysis ID
     - samples
     - path to sample .bam files
-    - reference samples for plotting
     - genome build per sample
 - configured by the user ([config_downsampling.yaml](config/config_downsampling.yaml.tsv)):
     - path to sample.tsv 

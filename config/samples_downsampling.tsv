@@ -1,3 +1,3 @@
-ID	sample	path	ref_samples	genome_build
-healthy	IH01	"/fast/groups/ag_kircher/cfDNA-data/Cell_2016/BAMs/IH01.bam"	IH01	GRCh37
-healthy	BH01	"/fast/groups/ag_kircher/cfDNA-data/Cell_2016/BAMs/BH01.bam"	IH01	GRCh37
+ID	sample	path	genome_build
+healthy	IH02	"/fast/groups/ag_kircher/cfDNA-data/Cell_2016/BAMs/IH02.bam"	GRCh37
+healthy	IH03	"/fast/groups/ag_kircher/cfDNA-data/Cell_2016/BAMs/IH03.bam"	GRCh37

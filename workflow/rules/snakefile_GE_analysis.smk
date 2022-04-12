@@ -8,9 +8,6 @@ samples = pd.read_csv("config/samples_downsampling.tsv", sep="\t").set_index("sa
 samples.index.names = ["sample_id"]
 validate(samples, schema="../schemas/samples.schema.yaml")
 
-def get_refsample(refsample):
-    return "results/intermediate/{ID}/FFT_table/transcriptanno-{SAMPLE}-FFT_table.{GENOME}.tsv".format(ID = samples["ID"].loc[samples["sample"] == refsample].values[0], SAMPLE = refsample, GENOME = samples["genome_build"].loc[samples["sample"] == refsample].values[0])
-
 
 rule join: 
     input:
