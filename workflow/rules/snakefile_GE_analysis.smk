@@ -66,6 +66,7 @@ rule extract_counts:
             "results/intermediate/transcriptAnno/transcriptAnno-{GENOME}.103.body.bed.gz"
         ),
         BAMFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam",
+        INDEXFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam.bai",
     output:
         WPS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_WPS.{COV}x.{GENOME}.csv.gz",
         COV="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_COV.{COV}x.{GENOME}.csv.gz",
@@ -89,6 +90,7 @@ rule extract_counts_background:
     input:
         background="results/intermediate/transcriptAnno/transcriptAnno_background-{GENOME}.103.body.bed.gz",
         BAMFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam",
+        INDEXFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam.bai",
     output:
         WPS="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_WPS_background.{COV}x.{GENOME}.csv.gz",
         COV="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_COV_background.{COV}x.{GENOME}.csv.gz",
