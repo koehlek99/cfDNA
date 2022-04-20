@@ -4,9 +4,6 @@ description: an entry in the sample sheet
 
 # columns that the config/samples.tsv file can have and which type they should be
 properties:
-  ID:
-    type: string
-    description: experiment ID
   sample:
     type: string
     description: sample name/identifier
@@ -24,7 +21,6 @@ properties:
     description: contains additional, human readable info
 # columns that the config/samples.tsv file must have to pass schema validation
 required:
-  - ID
   - sample
   - path
   - genome_build

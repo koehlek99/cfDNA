@@ -5,11 +5,11 @@ configfile: "config/config_GE.yaml"
 validate(config, schema="../schemas/config.schema.yaml")
 
 samples = pd.read_csv("config/samples_downsampling.tsv", sep="\t").set_index("sample", drop=False)
-samples.index.names = ["sample_id"]
+#samples.index.names = ["sample_id"]
 validate(samples, schema="../schemas/samples.schema.yaml")
 
 
-rule join: 
+rule join:
     input:
         transcriptAnno= lambda wc: config[wc.GENOME]["transcriptAnno"],
         proteinAtlas= expand("resources/protein_atlas/RNAtable{SOURCE}.tsv.gz",
@@ -68,13 +68,13 @@ rule extract_counts:
         BAMFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam",
         INDEXFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam.bai",
     output:
-        WPS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_WPS.{COV}x.{GENOME}.csv.gz",
-        COV="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_COV.{COV}x.{GENOME}.csv.gz",
-        STARTS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_STARTS.{COV}x.{GENOME}.csv.gz",
+        WPS="results/intermediate/table/transcriptanno_{SAMPLE}_WPS.{COV}x.{GENOME}.csv.gz",
+        COV="results/intermediate/table/transcriptanno_{SAMPLE}_COV.{COV}x.{GENOME}.csv.gz",
+        STARTS="results/intermediate/table/transcriptanno_{SAMPLE}_STARTS.{COV}x.{GENOME}.csv.gz",
     params:
         minRL=config["minRL"],
         maxRL=config["maxRL"],
-        out_pre="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_%s.{COV}x.{GENOME}.csv.gz",
+        out_pre="results/intermediate/table/transcriptanno_{SAMPLE}_%s.{COV}x.{GENOME}.csv.gz",
     conda:
         "../envs/cfDNA.yml"
     shell:
@@ -92,13 +92,13 @@ rule extract_counts_background:
         BAMFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam",
         INDEXFILE="results/downsampling/{GENOME}/{SAMPLE}.{COV}x.bam.bai",
     output:
-        WPS="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_WPS_background.{COV}x.{GENOME}.csv.gz",
-        COV="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_COV_background.{COV}x.{GENOME}.csv.gz",
-        STARTS="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_STARTS_background.{COV}x.{GENOME}.csv.gz",
+        WPS="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_WPS_background.{COV}x.{GENOME}.csv.gz",
+        COV="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_COV_background.{COV}x.{GENOME}.csv.gz",
+        STARTS="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_STARTS_background.{COV}x.{GENOME}.csv.gz",
     params:
         minRL=config["minRL"],
         maxRL=config["maxRL"],
-        out_pre="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_%s_background.{COV}x.{GENOME}.csv.gz",
+        out_pre="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_%s_background.{COV}x.{GENOME}.csv.gz",
     conda:
         "../envs/cfDNA.yml"
     shell:
@@ -113,13 +113,13 @@ rule extract_counts_background:
 
 rule normalize_WPS:
     input:
-        target_WPS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_WPS.{COV}x.{GENOME}.csv.gz",
-        background_WPS="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_WPS_background.{COV}x.{GENOME}.csv.gz",
-        target_COV="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_COV.{COV}x.{GENOME}.csv.gz",
-        background_COV="results/intermediate/{ID}/background_region/table/transcriptanno_{SAMPLE}_COV_background.{COV}x.{GENOME}.csv.gz",
+        target_WPS="results/intermediate/table/transcriptanno_{SAMPLE}_WPS.{COV}x.{GENOME}.csv.gz",
+        background_WPS="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_WPS_background.{COV}x.{GENOME}.csv.gz",
+        target_COV="results/intermediate/table/transcriptanno_{SAMPLE}_COV.{COV}x.{GENOME}.csv.gz",
+        background_COV="results/intermediate/background_region/table/transcriptanno_{SAMPLE}_COV_background.{COV}x.{GENOME}.csv.gz",
     output:
-        output_WPS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_WPS_normalized.{COV}x.{GENOME}.tsv.gz",
-        output_COV="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_COV_normalized.{COV}x.{GENOME}.tsv.gz",
+        output_WPS="results/intermediate/table/transcriptanno_{SAMPLE}_WPS_normalized.{COV}x.{GENOME}.tsv.gz",
+        output_COV="results/intermediate/table/transcriptanno_{SAMPLE}_COV_normalized.{COV}x.{GENOME}.tsv.gz",
     conda:
         "../envs/overlays.yml"
     script:
@@ -128,9 +128,9 @@ rule normalize_WPS:
 
 rule FFT_table:
     input:
-        normalized_WPS="results/intermediate/{ID}/table/transcriptanno_{SAMPLE}_WPS_normalized.{COV}x.{GENOME}.tsv.gz",
+        normalized_WPS="results/intermediate/table/transcriptanno_{SAMPLE}_WPS_normalized.{COV}x.{GENOME}.tsv.gz",
     output:
-        FFT_table="results/intermediate/{ID}/FFT_table/transcriptanno-{SAMPLE}-FFT_table.{COV}x.{GENOME}.tsv.gz",
+        FFT_table="results/intermediate/FFT_table/transcriptanno-{SAMPLE}-FFT_table.{COV}x.{GENOME}.tsv.gz",
     conda:
         "../envs/overlays.yml"
     script:
