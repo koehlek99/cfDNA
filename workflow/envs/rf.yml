@@ -9,5 +9,5 @@ dependencies:
   - numpy
   - scipy
   - gzip
-  - joblib=0.17.0
-  - scikit-learn=0.24.1
+  - joblib
+  - scikit-learn=1.1.1

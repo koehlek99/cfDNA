@@ -51,13 +51,15 @@ def get_final_output():
     final_output.extend(
         expand("results/rf/{GENOME}/features_{SAMPLE}.{COV}x.csv.gz",
             SAMPLE=samples["sample"],
+            MODEL=config["model"],
             COV=config["coverage"],
             GENOME=samples["genome_build"],
         ),
     ),
     final_output.extend(
-        expand("results/rf/{GENOME}/predictions_{SAMPLE}.{COV}x.csv.gz",
+        expand("results/rf/{GENOME}/predictions_{SAMPLE}_{MODEL}.{COV}x.csv.gz",
             SAMPLE=samples["sample"],
+            MODEL=config["model"],
             COV=config["coverage"],
             GENOME=samples["genome_build"],
         ),
